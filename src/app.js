@@ -1,82 +1,56 @@
-// se importa la librería necesaria para la creación del API
-const express = require("express")
-const path = require("path")
-const cors = require("cors")
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
 
-// Modulos de la aplicación 
-const user = require("./controllers/usercontroller")
-const db = require("./connection/dbconnection")
+const userController = require("./controllers/usercontroller"); // Controlador de usuarios
+const db = require("./connection/dbconnection"); // Conexión a la base de datos
+const productRoutes = require("./routes/productRoutes"); // Rutas de productos
 
-const app = express()
+const app = express();
+const port = 5000;
 
-// Se usa para leer el "body" de la solicitud del cliente
-app.use(express.json())
-
-app.use(cors())
-
-const port = 5000
+// Middlewares
+app.use(express.json()); // Analizar JSON en el cuerpo de las solicitudes
+app.use(cors()); // Permitir solicitudes CORS
+app.use(express.static(path.join(__dirname, "../public"))); // Archivos estáticos
 
 ////////////////////////////////////////////////////////////////////////
-//                    Creación de los métodos/verbos GET              //
+//                      Configuración de Rutas                        //
 ////////////////////////////////////////////////////////////////////////
 
-// se define la ruta del método GET
-// necesita ruta: /db y una función (req, res) => {}
-// 
+// Ruta para la base de datos simulada
 app.get("/db", (req, res) => {
+    const data = db.readDB();
+    res.status(200).json({ message: "Here", data });
+    console.log(`Nombre: ${data.name}, Edad: ${data.age}`);
+});
 
-    res.status(200).send("Here")
-    
-    // uso de un modulo propio para leer un archivo
-    const data = db.readDB()
+// Rutas CRUD para usuarios
+app.get("/users/:id", userController.get);
+app.post("/users", userController.create);
+app.put("/users/:id", userController.update);
+app.delete("/users/:id", userController.delete);
 
-    console.log(data.name)
-    console.log(data.age)
-})
+// Rutas para productos
+app.use('/api/products', productRoutes);
 
+// Ruta principal para la página de inicio
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/views/index.html"));
+});
 
-// :id -> string = 23, LLL, nombre, ABFBBC
-app.get("/users/:id", user.get )
+// Manejo de solicitudes POST, PUT, PATCH, DELETE en la raíz (demostrativo)
+app.post("/", (req, res) => res.status(201).send("Mensaje tipo POST"));
+app.put("/", (req, res) => res.status(204).send("Mensaje desde el PUT"));
+app.patch("/", (req, res) => res.status(204).send("Mensaje desde el PATCH"));
+app.delete("/", (req, res) => res.status(204).send("Mensaje desde el DELETE"));
 
-app.post("/users/", user.create)
-
-app.put("/users/:id", user.update)
-
-app.delete("/users/:id", user.delete)
-
-
-app.get("/", (req, res) => {
-    
-    // 200 -> OK 
-    res.status(200).send("Hola desde /")
-    console.log("Hola")
-    console.log(req)
-})
-
-app.post("/", (req, res) => {
-    // 201 -> Ok -> Created
-    res.status(201).send('Mensaje tipo POST')
-})
-
-app.put("/", (req, res) => {
-    // 204 -> Ok -> No Content
-    console.log(req.method)
-    res.status(204).send("Mensaje desde el PUT")
-})
-
-app.patch("/", (req, res) => {
-    console.log(req.method)
-    res.status(204).send("Pathc")
-})
-
-app.delete("/", (req, res) => {
-    console.log(req.method)
-    res.status(204).send("Deleted ")
-})
-
-
+// Ruta para manejar cualquier solicitud no definida (404)
 app.get("*", (req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "..", "public", "notfound.html"))
-} )
+    res.status(404).sendFile(path.join(__dirname, "../public/views/notfound.html"));
+});
 
-app.listen(port)
+// Iniciar el servidor
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
+});

@@ -1,13 +1,53 @@
 {
-    "users":[
-        
+    "users": [
+        {
+            "id": "1",
+            "name": "Juan Pérez",
+            "email": "juan@example.com",
+            "password": "123456",
+            "role": "client",
+            "createdAt": "2024-11-01T08:00:00.000Z"
+        },
+        {
+            "id": "2",
+            "name": "Ana López",
+            "email": "ana@example.com",
+            "password": "123456",
+            "role": "admin",
+            "createdAt": "2024-11-01T08:00:00.000Z"
+        }
     ],
-
-    "products":[
-
+    "products": [
+        {
+            "id": "1",
+            "name": "Producto 1",
+            "description": "Descripción del producto 1",
+            "price": 100,
+            "stock": 50,
+            "category": "Tecnología",
+            "createdAt": "2024-11-01T08:00:00.000Z"
+        },
+        {
+            "id": "2",
+            "name": "Producto 2",
+            "description": "Descripción del producto 2",
+            "price": 200,
+            "stock": 30,
+            "category": "Hogar",
+            "createdAt": "2024-11-01T08:00:00.000Z"
+        }
     ],
-
     "orders": [
-
+        {
+            "id": "1",
+            "userId": "1",
+            "items": [
+                { "productId": "1", "quantity": 2 },
+                { "productId": "2", "quantity": 1 }
+            ],
+            "total": 400,
+            "status": "completed",
+            "date": "2024-11-15T10:00:00.000Z"
+        }
     ]
 }

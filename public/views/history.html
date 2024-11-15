@@ -1,0 +1,17 @@
+<div id="order-history"></div>
+<script>
+    const token = localStorage.getItem('token');
+    fetch('/api/orders/history', {
+        headers: { 'Authorization': token },
+    }).then(res => res.json()).then(orders => {
+        document.getElementById('order-history').innerHTML = orders.map(order => `
+            <div>
+                <h3>Pedido ${order.id}</h3>
+                <p>Total: $${order.total}</p>
+                <ul>
+                    ${order.items.map(item => `<li>${item.name} x${item.quantity}</li>`).join('')}
+                </ul>
+            </div>
+        `).join('');
+    });
+</script>

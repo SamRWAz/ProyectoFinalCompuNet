@@ -1,21 +1,31 @@
 const Product = require('../models/Product');
 
-// Controlador para obtener todos los productos
 const getAllProducts = (req, res) => {
-    const products = Product.getAllProducts();
-    res.json(products);
+    try {
+        const products = Product.getAllProducts(); // Leer productos del modelo
+        res.status(200).json(products); // Enviar productos como respuesta
+    } catch (error) {
+        console.error('Error al obtener productos:', error);
+        res.status(500).json({ message: 'Error interno al obtener productos' });
+    }
 };
 
-// Controlador para obtener un producto por ID
+
 const getProductById = (req, res) => {
     const productId = req.params.id;
-    const product = Product.getProductById(productId);
 
-    if (!product) {
-        return res.status(404).json({ message: 'Producto no encontrado' });
+    try {
+        const product = Product.getProductById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        res.status(200).json(product);
+    } catch (error) {
+        console.error('Error al obtener detalles del producto:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
-
-    res.json(product);
 };
 
 // Controlador para agregar un nuevo producto

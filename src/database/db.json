@@ -35,6 +35,24 @@
             "stock": 30,
             "category": "Hogar",
             "createdAt": "2024-11-01T08:00:00.000Z"
+        },
+        {
+            "id": "3",
+            "name": "Producto 3",
+            "description": "Descripción del producto 3",
+            "price": 150,
+            "stock": 20,
+            "category": "Accesorios",
+            "createdAt": "2024-11-10T08:00:00.000Z"
+        },
+        {
+            "id": "4",
+            "name": "Producto 4",
+            "description": "Descripción del producto 4",
+            "price": 300,
+            "stock": 15,
+            "category": "Electrodomésticos",
+            "createdAt": "2024-11-10T08:00:00.000Z"
         }
     ],
     "orders": [
@@ -48,6 +66,17 @@
             "total": 400,
             "status": "completed",
             "date": "2024-11-15T10:00:00.000Z"
+        },
+        {
+            "id": "2",
+            "userId": "2",
+            "items": [
+                { "productId": "1", "quantity": 1 },
+                { "productId": "3", "quantity": 2 }
+            ],
+            "total": 400,
+            "status": "pending",
+            "date": "2024-11-16T12:00:00.000Z"
         }
     ]
 }

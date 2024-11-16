@@ -1,7 +1,5 @@
 const express = require('express');
 const {
-    getAllProducts,
-    getProductById,
     addProduct,
     updateProduct,
     deleteProduct,
@@ -10,10 +8,9 @@ const {
 const { verifyToken, isAdmin } = require('../middlewares/auth');
 const router = express.Router();
 
-router.get('/', getAllProducts);
-router.get('/:id', getProductById);
-router.post('/', addProduct);
-router.put('/:id', updateProduct);
-router.delete('/:id', deleteProduct);
+// Rutas protegidas para administrar productos
+router.post('/', addProduct); // Agregar un nuevo producto
+router.put('/:id', updateProduct); // Actualizar un producto
+router.delete('/:id', deleteProduct); // Eliminar un producto
 
 module.exports = router;

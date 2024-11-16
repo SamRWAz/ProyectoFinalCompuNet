@@ -8,21 +8,36 @@
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/">Tienda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/views/login.html">Iniciar Sesión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/register.html">Registrarse</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
+    <!-- Contenedor principal -->
     <div class="container mt-5">
+        <!-- Detalles del producto -->
         <div id="product-details" class="row">
             <!-- Los detalles del producto se cargarán dinámicamente aquí -->
         </div>
+
+        <!-- Botón para agregar al carrito -->
         <div class="mt-4 text-center">
             <button id="add-to-cart" class="btn btn-success">Agregar al Carrito</button>
         </div>
     </div>
 
-    <script src="/js/product_details.js"></script>
+    <!-- Scripts -->
+    <script src="/js/product_details.js" defer></script>
 </body>
 </html>

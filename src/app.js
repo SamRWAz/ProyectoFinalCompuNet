@@ -5,14 +5,27 @@ const cors = require("cors");
 const userController = require("./controllers/usercontroller"); // Controlador de usuarios
 const db = require("./connection/dbconnection"); // Conexión a la base de datos
 const productRoutes = require("./routes/productRoutes"); // Rutas de productos
+const publicProductRoutes = require("./routes/publicProductRoutes"); // Rutas públicas para productos
+const userRoutes = require('./routes/userRoutes');
+const roleRoutes = require('./routes/roleRoutes'); 
+const cartRoutes = require('./routes/cartRoutes.js');
 
-const app = express();
+const { verifyToken, isAdmin } = require('./middlewares/auth');
+
+const app = express(); // ¡Primero inicializa 'app'!
 const port = 5000;
 
 // Middlewares
 app.use(express.json()); // Analizar JSON en el cuerpo de las solicitudes
 app.use(cors()); // Permitir solicitudes CORS
 app.use(express.static(path.join(__dirname, "../public"))); // Archivos estáticos
+
+// Rutas públicas y protegidas
+app.use('/api/products', publicProductRoutes); // Rutas públicas
+app.use('/api/products/admin', verifyToken, isAdmin, productRoutes); // Rutas protegidas
+app.use('/api/users', userRoutes); // Rutas para usuarios
+app.use('/api/roles', roleRoutes);
+app.use('/api/cart', cartRoutes);
 
 ////////////////////////////////////////////////////////////////////////
 //                      Configuración de Rutas                        //
@@ -25,25 +38,10 @@ app.get("/db", (req, res) => {
     console.log(`Nombre: ${data.name}, Edad: ${data.age}`);
 });
 
-// Rutas CRUD para usuarios
-app.get("/users/:id", userController.get);
-app.post("/users", userController.create);
-app.put("/users/:id", userController.update);
-app.delete("/users/:id", userController.delete);
-
-// Rutas para productos
-app.use('/api/products', productRoutes);
-
 // Ruta principal para la página de inicio
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/views/index.html"));
 });
-
-// Manejo de solicitudes POST, PUT, PATCH, DELETE en la raíz (demostrativo)
-app.post("/", (req, res) => res.status(201).send("Mensaje tipo POST"));
-app.put("/", (req, res) => res.status(204).send("Mensaje desde el PUT"));
-app.patch("/", (req, res) => res.status(204).send("Mensaje desde el PATCH"));
-app.delete("/", (req, res) => res.status(204).send("Mensaje desde el DELETE"));
 
 // Ruta para manejar cualquier solicitud no definida (404)
 app.get("*", (req, res) => {

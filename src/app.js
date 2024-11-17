@@ -9,6 +9,7 @@ const publicProductRoutes = require("./routes/publicProductRoutes"); // Rutas p√
 const userRoutes = require('./routes/userRoutes');
 const roleRoutes = require('./routes/roleRoutes'); 
 const cartRoutes = require('./routes/cartRoutes.js');
+const paymentRoutes = require('./routes/paymentRoutes');
 
 const { verifyToken, isAdmin } = require('./middlewares/auth');
 
@@ -26,6 +27,7 @@ app.use('/api/products/admin', verifyToken, isAdmin, productRoutes); // Rutas pr
 app.use('/api/users', userRoutes); // Rutas para usuarios
 app.use('/api/roles', roleRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/payment', paymentRoutes);
 
 ////////////////////////////////////////////////////////////////////////
 //                      Configuraci√≥n de Rutas                        //

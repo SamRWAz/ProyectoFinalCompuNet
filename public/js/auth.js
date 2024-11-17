@@ -14,15 +14,13 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            // Guarda el token y el rol en localStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('role', data.role);
+            localStorage.setItem('token', data.token); 
+            localStorage.setItem('role', data.role);   
 
-            // Redirige según el rol del usuario
-            if (data.role === 'client') {
-                window.location.href = '/views/home_client.html'; // Redirige al home del cliente
-            } else if (data.role === 'admin') {
-                window.location.href = '/views/home_admin.html'; // Redirige al home del admin
+            if (data.role === 'admin') {
+                window.location.href = '/views/home_admin.html'; 
+            } else if (data.role === 'client') {
+                window.location.href = '/views/home_client.html'; 
             }
         } else {
             alert('Credenciales inválidas');
@@ -34,9 +32,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 });
 
 
-// Lógica para el formulario de registro
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -49,13 +47,14 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         });
 
         if (response.ok) {
-            alert('Registro exitoso');
+            alert('Registro exitoso. Ahora puedes iniciar sesión.');
             window.location.href = '/views/login.html';
         } else {
-            alert('Error al registrarse');
+            const error = await response.json();
+            alert(`Error: ${error.message}`);
         }
     } catch (error) {
-        console.error('Error al registrarse:', error);
-        alert('Error en el servidor');
+        console.error('Error en el registro:', error);
+        alert('Hubo un problema al registrarte.');
     }
 });

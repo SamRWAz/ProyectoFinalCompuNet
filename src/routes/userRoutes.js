@@ -9,8 +9,8 @@ const SECRET_KEY = 'secret123'; // Llave secreta para JWT
 const router = express.Router();
 
 router.post('/login', (req, res) => {
-    const { email, password } = req.body;
-    console.log('Datos recibidos:', { email, password }); // Para depuración
+    const { email, password, role } = req.body;
+    console.log('Datos recibidos:', { email, password, role }); // Depuración
 
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
     const user = db.users.find(u => u.email === email && u.password === password);
@@ -19,9 +19,15 @@ router.post('/login', (req, res) => {
         return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
+    // Validar el rol del usuario
+    if (user.role !== role) {
+        return res.status(403).json({ message: 'Rol incorrecto para este usuario' });
+    }
+
     const token = jwt.sign({ id: user.id, role: user.role }, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token, role: user.role }); // Devuelve token y rol al frontend
 });
+
 
 
 router.post('/register', (req, res) => {
@@ -29,24 +35,21 @@ router.post('/register', (req, res) => {
         const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
         const { name, email, password } = req.body;
 
-        // Validar que los datos no estén vacíos
         if (!name || !email || !password) {
-            return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+            return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
         }
 
-        // Validar si el usuario ya existe
         const userExists = db.users.some(u => u.email === email);
         if (userExists) {
-            return res.status(400).json({ message: 'El correo ya está registrado' });
+            return res.status(400).json({ message: 'El correo ya está registrado.' });
         }
 
-        // Crear nuevo usuario
         const newUser = {
             id: String(db.users.length + 1),
             name,
             email,
             password,
-            role: 'client', // Los usuarios registrados serán clientes por defecto
+            role: 'client', // El rol siempre será cliente
         };
 
         db.users.push(newUser);
@@ -54,8 +57,8 @@ router.post('/register', (req, res) => {
 
         res.status(201).json(newUser);
     } catch (error) {
-        console.error('Error al registrar usuario:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
+        console.error('Error en el registro:', error);
+        res.status(500).json({ message: 'Error interno del servidor.' });
     }
 });
 

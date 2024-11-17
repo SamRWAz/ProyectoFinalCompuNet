@@ -21,7 +21,6 @@ function getProductsFromDB() {
     }
 }
 
-// Agregar un producto al carrito
 router.post('/', verifyToken, (req, res) => {
     const userId = req.user.id;
     const { productId, quantity } = req.body;
@@ -30,7 +29,7 @@ router.post('/', verifyToken, (req, res) => {
         return res.status(400).json({ message: 'Datos incompletos.' });
     }
 
-    const products = getProductsFromDB();
+    const products = getProductsFromDB(); // Leer los productos de `db.json`
     const product = products.find(p => p.id === productId);
 
     if (!product) {
@@ -55,6 +54,7 @@ router.post('/', verifyToken, (req, res) => {
     res.status(201).json({ message: 'Producto agregado al carrito.', cart: carts[userId] });
 });
 
+
 // Obtener el carrito
 router.get('/', verifyToken, (req, res) => {
     const userId = req.user.id;
@@ -62,7 +62,7 @@ router.get('/', verifyToken, (req, res) => {
     res.status(200).json(userCart);
 });
 
-// Enviar el carrito para pago
+// Enviar carrito a la página de pago
 router.post('/checkout', verifyToken, (req, res) => {
     const userId = req.user.id;
     const cart = carts[userId];

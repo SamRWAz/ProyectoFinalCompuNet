@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         productList.innerHTML = products.map(product => `
             <div class="col-md-4">
                 <div class="card mb-4">
+                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
                         <h5 class="card-title">${product.name}</h5>
                         <p class="card-text">${product.description}</p>
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <p><strong>Stock:</strong> ${product.stock}</p>
                         <input type="number" id="quantity-${product.id}" class="form-control mb-2" placeholder="Cantidad" min="1" max="${product.stock}" value="1">
                         <button class="btn btn-success" onclick="addToCart('${product.id}')">Agregar al Carrito</button>
-                        <button class="btn btn-primary " onclick="viewProductDetails('${product.id}')">Ver Detalles</button>
+                        <button class="btn btn-primary" onclick="viewProductDetails('${product.id}')">Ver Detalles</button>
                     </div>
                 </div>
             </div>
@@ -28,31 +29,45 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Al agregar un producto al carrito
-async function addToCart(productId, quantity, price, productName) {
+// Función para agregar al carrito
+async function addToCart(productId) {
     const token = localStorage.getItem('token');
     if (!token) {
         alert('Debes iniciar sesión para agregar productos al carrito.');
         return;
     }
 
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+    const quantity = parseInt(quantityInput.value, 10);
+
+    if (!quantity || quantity <= 0) {
+        alert('Por favor, ingrese una cantidad válida.');
+        return;
+    }
+
     try {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cart.find(item => item.productId === productId);
+        const response = await fetch('/api/cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ productId, quantity }),
+        });
 
-        if (existingItem) {
-            existingItem.quantity += quantity;
-        } else {
-            cart.push({ productId, productName, quantity, price });
-        }
+        if (!response.ok) throw new Error('Error al agregar producto al carrito.');
 
-        // Guardar carrito en localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
+        const { cart } = await response.json();
         alert('Producto agregado al carrito.');
-
         console.log('Carrito actualizado:', cart);
     } catch (error) {
         console.error('Error al agregar producto al carrito:', error);
+        alert('Hubo un problema al agregar el producto al carrito.');
     }
 }
 
+// Función para redirigir al detalle del producto
+function viewProductDetails(productId) {
+    // Redirigir a la página de detalles del producto con el ID en la URL
+    window.location.href = `/views/product_details.html?id=${productId}`;
+}

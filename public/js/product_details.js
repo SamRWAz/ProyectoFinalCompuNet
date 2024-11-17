@@ -78,7 +78,7 @@ async function loadProductDetails() {
 
         productDetails.innerHTML = `
             <div class="col-md-6">
-                <img src="https://via.placeholder.com/200x200" class="img-fluid" alt="${product.name}">
+                <img src="${product.image}" class="img-fluid" alt="${product.name}">
             </div>
             <div class="col-md-6">
                 <h1>${product.name}</h1>

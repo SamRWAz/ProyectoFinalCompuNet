@@ -3,8 +3,9 @@ const { verifyToken } = require('../middlewares/auth');
 
 const router = express.Router();
 
-let purchaseHistory = {};
+let purchaseHistory = {}; // Historial de compras por usuario
 
+// Procesar el pago y generar la factura
 router.post('/', verifyToken, (req, res) => {
     const userId = req.user.id;
     const { paymentDetails, cart } = req.body;
@@ -14,10 +15,6 @@ router.post('/', verifyToken, (req, res) => {
     }
 
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-    if (total <= 0) {
-        return res.status(400).json({ message: 'El carrito está vacío o contiene datos inválidos.' });
-    }
 
     const invoice = {
         userId,
@@ -35,7 +32,14 @@ router.post('/', verifyToken, (req, res) => {
     if (!purchaseHistory[userId]) purchaseHistory[userId] = [];
     purchaseHistory[userId].push(invoice);
 
-    res.status(201).json({ message: 'Pago realizado con éxito.', invoice });
+    res.status(201).json({ message: 'Pago procesado con éxito.', invoice });
+});
+
+// Obtener historial de compras
+router.get('/history', verifyToken, (req, res) => {
+    const userId = req.user.id;
+    const history = purchaseHistory[userId] || [];
+    res.status(200).json(history);
 });
 
 module.exports = router;

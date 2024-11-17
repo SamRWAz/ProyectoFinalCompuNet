@@ -1,36 +1,35 @@
-<div id="cart"></div>
-<button onclick="finalizePurchase()">Finalizar Compra</button>
-<script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Tienda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/views/cart.html">Carrito</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/history.html">Historial de Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/index.html" id="logout">Cerrar Sesión</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    function addToCart(productId) {
-        fetch(`/api/products/${productId}`)
-            .then(res => res.json())
-            .then(product => {
-                const item = cart.find(p => p.id === productId);
-                if (item) item.quantity += 1;
-                else cart.push({ ...product, quantity: 1 });
-                localStorage.setItem('cart', JSON.stringify(cart));
-            });
-    }
-
-    function finalizePurchase() {
-        const token = localStorage.getItem('token');
-        fetch('/api/orders', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization': token
-            },
-            body: JSON.stringify({ items: cart }),
-        }).then(res => {
-            if (res.ok) {
-                alert('Compra realizada');
-                localStorage.removeItem('cart');
-                window.location.href = '/views/index.html';
-            } else {
-                alert('Error al finalizar la compra');
-            }
-        });
-    }
-</script>
+    <div class="container mt-5">
+        <h1 class="text-center">Tu Carrito</h1>
+        <div id="cart" class="mt-4"></div>
+        <div class="text-center mt-4">
+        </div>
+    </div>
+    <script src="/js/cart.js" defer></script>
+</body>
+</html>

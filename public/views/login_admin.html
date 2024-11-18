@@ -16,14 +16,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/views/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="/views/login.html">Iniciar Sesión</a></li>
                     <li class="nav-item"><a class="nav-link" href="/views/register.html">Registrarse</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" onclick="logout()">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    
+
     <div class="container mt-5">
         <h1 class="text-center">Iniciar Sesión como Administrador</h1>
         <form id="login-admin-form" class="mt-4 w-50 mx-auto">
@@ -38,6 +39,8 @@
             <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
         </form>
     </div>
+    
     <script src="/js/login_admin.js" defer></script>
+    <script src="/js/global.js" defer></script>
 </body>
 </html>

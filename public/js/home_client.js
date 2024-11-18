@@ -82,5 +82,5 @@ async function addToCart(productId) {
 // Función para redirigir al detalle del producto
 function viewProductDetails(productId) {
     // Redirigir a la página de detalles del producto con el ID en la URL
-    window.location.href = `/views/product_details.html?id=${productId}`;
+    window.location.href = `/views/product_detail_client.html?id=${productId}`;
 }

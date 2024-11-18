@@ -7,4 +7,5 @@ const router = express.Router();
 router.get('/', getAllProducts); // Obtener todos los productos
 router.get('/:id', getProductById); // Obtener un producto por ID
 
+
 module.exports = router;

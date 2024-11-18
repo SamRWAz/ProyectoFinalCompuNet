@@ -61,4 +61,5 @@ router.get('/history', verifyToken, (req, res) => {
     res.status(200).json(history);
 });
 
+
 module.exports = router;

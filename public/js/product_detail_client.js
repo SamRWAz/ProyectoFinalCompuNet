@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         productDetails.innerHTML = `
             <div class="col-md-6">
-                <img src="${product.image}" class="img-fluid" alt="${product.name}">
+                <img src="${product.image}" class="img-fluid rounded" alt="${product.name}">
             </div>
             <div class="col-md-6">
                 <h1>${product.name}</h1>
@@ -24,10 +24,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <p><strong>Precio:</strong> $${product.price}</p>
                 <p><strong>Disponibles:</strong> ${product.stock}</p>
                 <div class="mt-3">
-                    <label for="quantity" class="form-label">Cantidad:</label>
-                    <input type="number" id="quantity" class="form-control" value="1" min="1" max="${product.stock}">
+                    <label for="quantity-${product.id}" class="form-label">Cantidad:</label>
+                    <input 
+                        type="number" 
+                        id="quantity-${product.id}" 
+                        class="form-control mb-3 w-50" 
+                        placeholder="Cantidad" 
+                        min="1" 
+                        max="${product.stock}" 
+                        value="1"
+                    >
                 </div>
-                <button id="add-to-cart" class="btn btn-success mt-3">Agregar al Carrito</button>
+                <button 
+                    id="add-to-cart-${product.id}" 
+                    class="btn btn-success w-50">Agregar al Carrito</button>
             </div>
         `;
 
@@ -40,8 +50,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Configurar botón "Agregar al Carrito"
 function setupAddToCart(productId) {
-    document.getElementById('add-to-cart').addEventListener('click', async () => {
-        const quantity = parseInt(document.getElementById('quantity').value);
+    const addToCartButton = document.getElementById(`add-to-cart-${productId}`);
+    const quantityInput = document.getElementById(`quantity-${productId}`);
+
+    addToCartButton.addEventListener('click', async () => {
+        const quantity = parseInt(quantityInput.value);
         const token = localStorage.getItem('token');
 
         if (!token) {
@@ -50,8 +63,8 @@ function setupAddToCart(productId) {
             return;
         }
 
-        if (quantity <= 0) {
-            alert('La cantidad debe ser mayor a 0.');
+        if (quantity <= 0 || isNaN(quantity)) {
+            alert('Por favor, ingrese una cantidad válida.');
             return;
         }
 

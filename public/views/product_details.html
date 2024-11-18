@@ -16,9 +16,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/views/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="/views/login.html">Iniciar Sesión</a></li>
                     <li class="nav-item"><a class="nav-link" href="/views/register.html">Registrarse</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" onclick="logout()">Cerrar Sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -28,16 +29,13 @@
     <div class="container mt-5">
         <!-- Detalles del producto -->
         <div id="product-details" class="row">
-            <!-- Los detalles del producto se cargarán dinámicamente aquí -->
+        
         </div>
 
-        <!-- Botón para agregar al carrito -->
-        <div class="mt-4 text-center">
-            <button id="add-to-cart" class="btn btn-success">Agregar al Carrito</button>
-        </div>
     </div>
 
     <!-- Scripts -->
     <script src="/js/product_details.js" defer></script>
+    <script src="/js/global.js" defer></script>
 </body>
 </html>

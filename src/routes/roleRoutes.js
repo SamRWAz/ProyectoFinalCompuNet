@@ -13,4 +13,6 @@ router.post('/client-action', verifyToken, isClient, (req, res) => {
     res.status(200).json({ message: 'Acción de cliente realizada' });
 });
 
+
+
 module.exports = router;

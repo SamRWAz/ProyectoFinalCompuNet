@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const products = await response.json();
 
         productList.innerHTML = products.map(product => `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="card mb-4">
                     <img src="${product.image}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">

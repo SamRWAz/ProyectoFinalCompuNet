@@ -8,29 +8,55 @@
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">Tienda</a>
+            <a class="navbar-brand" href="#">Mi Tienda</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/views/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="/views/login.html">Iniciar Sesión</a></li>
                     <li class="nav-item"><a class="nav-link" href="/views/register.html">Registrarse</a></li>
                 </ul>
             </div>
         </div>
+        
     </nav>
+    
 
     <div class="container mt-5">
-        <h1 class="text-center">Productos Disponibles</h1>
-        <div id="product-list" class="row">
+        <h1 class="text-center mb-4">Productos Disponibles</h1>
+        <div id="product-list" class="row mt-5">
             <!-- Los productos se cargarán dinámicamente aquí -->
-        </div>
-        
+        </div> 
     </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+        <div class="container">
+            <p class="mb-1 text-light">&copy; 2024 Mi Tienda. Todos los derechos reservados.</p>
+            <p class="text-light">Creado con ❤️ por el equipo de desarrollo.</p>
+            <ul class="list-unstyled d-flex justify-content-center">
+                <li class="mx-3">
+                    <a href="https://facebook.com" target="_blank" class="text-light">
+                        <i class="bi bi-facebook"></i> Facebook
+                    </a>
+                </li>
+                <li class="mx-3">
+                    <a href="https://twitter.com" target="_blank" class="text-light">
+                        <i class="bi bi-twitter"></i> Twitter
+                    </a>
+                </li>
+                <li class="mx-3">
+                    <a href="https://instagram.com" target="_blank" class="text-light">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
 
     <script src="/js/index.js"></script>
 </body>

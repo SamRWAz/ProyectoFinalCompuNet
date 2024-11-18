@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    loadInvoiceDetails();
+    console.log('Página de pago cargada.');
 
     const paymentForm = document.getElementById('payment-form');
     paymentForm.addEventListener('submit', async (e) => {
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            console.log('Enviando datos al servidor de pago...', { paymentDetails, cart });
+
             const response = await fetch('/api/payment', {
                 method: 'POST',
                 headers: {
@@ -37,11 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ paymentDetails, cart }),
             });
 
-            if (!response.ok) throw new Error('Error al procesar el pago.');
+            if (!response.ok) {
+                const error = await response.json();
+                console.error('Error del servidor:', error);
+                throw new Error(error.message);
+            }
 
             const { invoice } = await response.json();
+            console.log('Factura generada:', invoice);
+
             alert('Pago procesado con éxito.');
             displayInvoice(invoice);
+
+            // Limpiar carrito después del pago
+            localStorage.removeItem('cart');
+
+            // Reiniciar los campos del formulario de pago
+            paymentForm.reset();
+
         } catch (error) {
             console.error('Error al procesar el pago:', error);
             alert('Hubo un problema al procesar el pago.');
@@ -49,19 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function loadInvoiceDetails() {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart && cart.length > 0) {
-        displayInvoice({ items: cart, date: new Date().toISOString(), total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0) });
-    } else {
-        alert('No hay datos en el carrito.');
-    }
-}
-
-
 function displayInvoice(invoice) {
     const invoiceContent = document.getElementById('invoice-content');
-    
+
     // Extraer la fecha y hora
     const invoiceDate = new Date(invoice.date);
     const formattedDate = invoiceDate.toLocaleDateString();
@@ -104,7 +109,6 @@ function displayInvoice(invoice) {
     // Configurar el botón de descarga
     document.getElementById('download-pdf').addEventListener('click', () => generatePDF(invoiceHTML));
 }
-
 
 function generatePDF(invoiceHTML) {
     const pdfWindow = window.open('', '_blank');

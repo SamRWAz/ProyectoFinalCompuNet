@@ -74,8 +74,14 @@
             "id": "1",
             "userId": "1",
             "items": [
-                { "productId": "1", "quantity": 2 },
-                { "productId": "2", "quantity": 1 }
+                {
+                    "productId": "1",
+                    "quantity": 2
+                },
+                {
+                    "productId": "2",
+                    "quantity": 1
+                }
             ],
             "total": 300,
             "status": "completed",
@@ -85,12 +91,33 @@
             "id": "2",
             "userId": "2",
             "items": [
-                { "productId": "3", "quantity": 1 },
-                { "productId": "4", "quantity": 1 }
+                {
+                    "productId": "3",
+                    "quantity": 1
+                },
+                {
+                    "productId": "4",
+                    "quantity": 1
+                }
             ],
             "total": 340,
             "status": "pending",
             "date": "2024-11-16T12:00:00.000Z"
+        },
+        {
+            "id": "1731948677566",
+            "userId": "1",
+            "date": "2024-11-18T16:51:17.566Z",
+            "items": [
+                {
+                    "productId": "1",
+                    "productName": "Auriculares Bluetooth",
+                    "quantity": 1,
+                    "price": 120,
+                    "subtotal": 120
+                }
+            ],
+            "total": 120
         }
     ]
 }

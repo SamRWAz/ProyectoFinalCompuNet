@@ -9,10 +9,21 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/views/home_client.html">Tienda</a>
+            <a class="navbar-brand" href="#">Tienda</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/views/home_client.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/cart.html">Carrito</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/history.html">Historial de Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/views/index.html" id="logout">Cerrar Sesión</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
-
+    
     <div class="container mt-5">
         <div id="product-details" class="row">
             <!-- Los detalles del producto se cargarán dinámicamente -->

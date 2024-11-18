@@ -2,14 +2,19 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'secret123';
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers['authorization']?.split(' ')[1]; // Extrae el token
+    const authHeader = req.headers['authorization'];
+    console.log('Encabezado de autorización recibido:', authHeader); // Log para depuración
+
+    const token = authHeader?.split(' ')[1]; // Extrae el token
 
     if (!token) {
+        console.error('Token no proporcionado.');
         return res.status(403).json({ message: 'Token requerido.' });
     }
 
     try {
         const decoded = jwt.verify(token, SECRET_KEY); // Verifica el token
+        console.log('Token verificado. Datos decodificados:', decoded); // Log para depuración
         req.user = decoded; // Agrega la información del usuario al objeto `req`
         next();
     } catch (error) {
@@ -17,6 +22,7 @@ const verifyToken = (req, res, next) => {
         res.status(401).json({ message: 'Token inválido.' });
     }
 };
+
 
 
 // Middleware para verificar si el usuario es administrador

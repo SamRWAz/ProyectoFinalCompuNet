@@ -1,63 +1,64 @@
-document.addEventListener('DOMContentLoaded', loadPurchaseHistory);
-
-async function loadPurchaseHistory() {
-    const historyElement = document.getElementById('history');
+document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        historyElement.innerHTML = '<p class="text-center">Debes iniciar sesión para ver tu historial de compras.</p>';
+        alert('Debes iniciar sesión para ver tu historial.');
+        window.location.href = '/views/login.html';
         return;
     }
 
     try {
-        const response = await fetch('/api/cart/history', {
+        const response = await fetch('/api/payment/history', {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
 
-        if (!response.ok) throw new Error('Error al cargar el historial.');
+        if (!response.ok) {
+            const error = await response.json();
+            console.error('Error al cargar el historial:', error);
+            throw new Error(error.message || 'No se pudo cargar el historial.');
+        }
 
         const history = await response.json();
-
-        if (history.length === 0) {
-            historyElement.innerHTML = '<p class="text-center">No tienes compras anteriores.</p>';
-        } else {
-            historyElement.innerHTML = history.map(invoice => `
-                <div class="invoice mb-4">
-                    <h5>Factura - ${new Date(invoice.date).toLocaleString()}</h5>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${invoice.items.map(item => `
-                                <tr>
-                                    <td>${item.productName}</td>
-                                    <td>${item.quantity}</td>
-                                    <td>$${item.price.toFixed(2)}</td>
-                                    <td>$${(item.price * item.quantity).toFixed(2)}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="3">Total</th>
-                                <th>$${invoice.total.toFixed(2)}</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            `).join('');
-        }
+        displayHistory(history);
     } catch (error) {
-        console.error('Error al cargar el historial:', error);
-        historyElement.innerHTML = '<p class="text-center">Error al cargar el historial de compras.</p>';
+        console.error('Error:', error);
+        alert('Hubo un problema al cargar el historial.');
     }
+});
+
+function displayHistory(history) {
+    const historyElement = document.getElementById('history');
+
+    if (!history || history.length === 0) {
+        historyElement.innerHTML = '<p>No hay compras realizadas.</p>';
+        return;
+    }
+
+    historyElement.innerHTML = `
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Productos</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${history.map(order => `
+                    <tr>
+                        <td>${new Date(order.date).toLocaleString()}</td>
+                        <td>
+                            ${order.items.map(item => `
+                                ${item.quantity}x ${item.productName} ($${item.price.toFixed(2)})
+                            `).join('<br>')}
+                        </td>
+                        <td>$${order.total.toFixed(2)}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
 }

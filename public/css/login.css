@@ -1,0 +1,184 @@
+/* Fuente global */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', 'Helvetica Now', sans-serif;
+    margin: 0;
+    background: linear-gradient(90deg, #FF6F00, #FF4500, #FFB74D); /* Fondo cálido degradado */
+    color: #333; /* Texto oscuro para contraste */
+}
+
+/* Navbar */
+.navbar {
+    background-color: #FFF8E1; /* Fondo claro */
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: #FF4500 !important; /* Texto cálido */
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333 !important; /* Texto oscuro */
+    margin-left: 10px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #FF6347; /* Fondo rojo tomate */
+    color: #FFF !important;
+    transform: scale(1.1);
+}
+
+h1 {
+    font-size: 3rem;
+    color: #FF4500; /* Rojo suave */
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Tarjeta de Login */
+.card {
+    max-width: 500px; /* Ancho máximo de las tarjetas */
+    border: none;
+    border-radius: 15px; /* Bordes más suaves */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra ligera */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background-color: #FFF8E1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    background-color: #FF6F00; /* Naranja cálido */
+    color: #FFF; /* Texto claro */
+    font-weight: 700;
+    text-align: center;
+    padding: 15px;
+}
+
+.card-light {
+    max-width: 600px; /* Ancho máximo */
+    width: 100%; /* Adaptable al contenedor */
+}
+
+
+.container-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); /* Altura total menos la navbar */
+    padding: 20px;
+    margin-top: 20px; /* Espaciado adicional entre la tarjeta y la navbar */
+}
+
+.card-body {
+    background-color: #FFF; /* Fondo blanco */
+    color: #333; /* Texto oscuro */
+    text-align: center;
+    padding: 25px;
+}
+
+.card-body .form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.card-body input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.card-body .btn {
+    background-color: #FF6F00;
+    color: #FFF;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.card-body .btn:hover {
+    background-color: #FF4500; /* Rojo cálido */
+    transform: scale(1.05); /* Efecto de zoom */
+}
+
+.card-footer {
+    background-color: #FFF8E1; /* Fondo cálido */
+    color: #333; /* Texto oscuro */
+    text-align: center;
+    padding: 15px;
+}
+
+.card-footer a {
+    color: #FF6F00;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.card-footer a:hover {
+    color: #FF4500; /* Rojo cálido */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .card {
+        margin: 0 15px; /* Ajuste para pantallas pequeñas */
+    }
+
+    .navbar {
+        font-size: 0.9rem; /* Reducir tamaño de fuente */
+    }
+
+    .btn {
+        font-size: 0.95rem;
+    }
+}
+
+
+/* Botones iniciales */
+.btn-custom {
+    width: 150px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    background-color: #f8f9fa; /* Fondo inicial */
+    color: #333; /* Texto inicial */
+    border: 1px solid #ddd;
+}
+
+/* Botón seleccionado */
+.btn-check:checked + .btn-custom {
+    background-color: #FF6F00; /* Fondo cálido */
+    color: #FFF; /* Texto claro */
+    border-color: #FF6F00;
+    transform: scale(1.05); /* Efecto de escala */
+}
+
+/* Hover para botones no seleccionados */
+.btn-custom:hover {
+    background-color: #ffe0b3; /* Fondo hover */
+    color: #333;
+    border-color: #ffc107;
+}
+

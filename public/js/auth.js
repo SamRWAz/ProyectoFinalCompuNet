@@ -31,19 +31,24 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
     }
 });
 
-
 document.getElementById('register-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const selectedRole = document.querySelector('input[name="role"]:checked');
+
+    if (!selectedRole) {
+        alert('Por favor, selecciona un tipo de cuenta.');
+        return;
+    }
 
     try {
         const response = await fetch('/api/users/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password }),
+            body: JSON.stringify({ name, email, password, role: selectedRole.value }),
         });
 
         if (response.ok) {

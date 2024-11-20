@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         productList.innerHTML = products.map(product => `
             <div class="col-md-3">
-                <div class="card mb-4">
+                <div class="card shadow-sm">
                     <img src="${product.image}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
                         <h5 class="card-title">${product.name}</h5>

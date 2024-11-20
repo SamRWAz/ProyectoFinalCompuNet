@@ -1,8 +1,15 @@
+// librería para leer rutas 
+// https://nodejs.org/en/learn/manipulating-files/nodejs-file-paths
 const path = require("path")
+
+// librería para manipular archivos 
 const fs = require("fs")
 
- 
-const dbPath = path.join(__dirname, "../..", 'database', 'db.json')
+// __dirname = ruta actual del modulo 
+// ../.. = de la ruta actual del modulo dos carpetas atras
+// data = carpeta data
+// database.json = el archivo 
+const dbPath = path.join(__dirname, "../.." ,'database', 'db.json')
 
 
 const DBConnection = {

@@ -1,56 +1,57 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
 const cors = require("cors");
+const path = require('path');
+const authRoutes = require('./routes/authRoutes');
 
-const userController = require("./controllers/usercontroller"); // Controlador de usuarios
-const db = require("./connection/dbconnection"); // Conexión a la base de datos
-const productRoutes = require("./routes/productRoutes"); // Rutas de productos
-const publicProductRoutes = require("./routes/publicProductRoutes"); // Rutas públicas para productos
-const userRoutes = require('./routes/userRoutes');
-const roleRoutes = require('./routes/roleRoutes'); 
-const cartRoutes = require('./routes/cartRoutes.js');
-const paymentRoutes = require('./routes/paymentRoutes');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const { verifyToken, isAdmin } = require('./middlewares/auth');
+// Middleware de CORS
+app.use(cors());
 
-const app = express(); // ¡Primero inicializa 'app'!
-const port = 5000;
+// Middleware para servir archivos estáticos
+app.use(express.static(path.join(__dirname, '../public')));
 
-// Middlewares
-app.use(express.json()); // Analizar JSON en el cuerpo de las solicitudes
-app.use(cors()); // Permitir solicitudes CORS
-app.use(express.static(path.join(__dirname, "../public"))); // Archivos estáticos
+// Middlewares para parsear JSON y datos de formularios
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Rutas públicas y protegidas
-app.use('/api/products', publicProductRoutes); // Rutas públicas
-app.use('/api/products/admin', verifyToken, isAdmin, productRoutes); // Rutas protegidas
-app.use('/api/users', userRoutes); // Rutas para usuarios
-app.use('/api/roles', roleRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/payment', paymentRoutes);
+// Rutas de autenticación
+app.use('/auth', authRoutes);
 
-////////////////////////////////////////////////////////////////////////
-//                      Configuración de Rutas                        //
-////////////////////////////////////////////////////////////////////////
-
-// Ruta para la base de datos simulada
-app.get("/db", (req, res) => {
-    const data = db.readDB();
-    res.status(200).json({ message: "Here", data });
-    console.log(`Nombre: ${data.name}, Edad: ${data.age}`);
-});
-
-// Ruta principal para la página de inicio
+// Rutas para renderizar páginas
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/views/index.html"));
+  res.sendFile(path.join(__dirname, '../public/views/index.html'));
 });
 
-// Ruta para manejar cualquier solicitud no definida (404)
-app.get("*", (req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "../public/views/notfound.html"));
+app.get('/login', (req, res) => {
+  console.log('Ruta de login accedida');
+  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/login.html'));
+  res.sendFile(path.join(__dirname, '../public/views/login.html'));
 });
 
-// Iniciar el servidor
-app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+app.get('/register', (req, res) => {
+  console.log('Ruta de registro accedida');
+  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/register.html'));
+  res.sendFile(path.join(__dirname, '../public/views/register.html'));
 });
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/profile.html'));
+});
+
+// Middleware de manejo de errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ 
+    message: 'Algo salió mal', 
+    error: process.env.NODE_ENV === 'development' ? err.message : {} 
+  });
+});
+
+// Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+module.exports = app;

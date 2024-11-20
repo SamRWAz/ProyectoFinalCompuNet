@@ -1,0 +1,28 @@
+{
+  "users": {
+    "jcm@gmail.com": {
+      "id": "1732141416055",
+      "name": "Camilo Molina",
+      "email": "jcm@gmail.com",
+      "password": "$2b$10$lUHl2KOzu0qrwwLu7vhLgePblXvo5dyK.tIBRjZBrk07klajghsJ2",
+      "role": "admin"
+    },
+    "cm@gmail.com": {
+      "id": "1732141470359",
+      "name": "Camilo Molina",
+      "email": "cm@gmail.com",
+      "password": "$2b$10$yFFeVlGhyu9GCT15IM4mGeRLroTsrbje3sUUVdxzrgk76yE3mTCI2",
+      "role": "user"
+    },
+    "sh@gmail.com": {
+      "id": "1732146150578",
+      "name": "Sharik Camila ",
+      "email": "sh@gmail.com",
+      "password": "$2b$10$RzJrNgs4DaoxS1IdsNEQBeIAZRxRigoQ5Vol1SSF7itp0Dw6klfki",
+      "role": "user"
+    }
+  },
+  "products": {},
+  "carts": {},
+  "orders": {}
+}

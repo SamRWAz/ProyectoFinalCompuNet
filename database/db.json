@@ -12,17 +12,32 @@
       "name": "Camilo Molina",
       "email": "cm@gmail.com",
       "password": "$2b$10$yFFeVlGhyu9GCT15IM4mGeRLroTsrbje3sUUVdxzrgk76yE3mTCI2",
-      "role": "user"
+      "role": "customer"
     },
     "sh@gmail.com": {
       "id": "1732146150578",
       "name": "Sharik Camila ",
       "email": "sh@gmail.com",
       "password": "$2b$10$RzJrNgs4DaoxS1IdsNEQBeIAZRxRigoQ5Vol1SSF7itp0Dw6klfki",
-      "role": "user"
+      "role": "admin"
+    },
+    "m@gmail.com": {
+      "id": "1732198263111",
+      "name": "Mariana",
+      "email": "m@gmail.com",
+      "password": "$2b$10$zsindV.rKyriBkmSaxPqvurhZccfxv079LEgLnm0Jt30LWEUL8B5S",
+      "role": "customer"
     }
   },
-  "products": {},
+  "products": {
+    "Papa": {
+      "id": "1732208897154",
+      "name": "Papa",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JSTUFB0na_1y7yv_1aRZdQHaC4%26pid%3DApi&f=1&ipt=abd8af8a905a57e7466cb9babca76bfc4e22863aea59a21f26b12c62d13e4560&ipo=images",
+      "price": 100,
+      "quantity": 10
+    }
+  },
   "carts": {},
   "orders": {}
 }

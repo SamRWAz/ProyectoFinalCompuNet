@@ -13,7 +13,7 @@ const authMiddleware = {
                 role: user.role 
             }, 
             SECRET_KEY, 
-            { expiresIn: '24h' }
+            { expiresIn: '1h' }
         );
     },
 
@@ -30,7 +30,7 @@ const authMiddleware = {
             req.user = decoded;
             next();
         } catch (error) {
-            return res.status(401).json({ message: 'Token inválido' });
+            return res.status(401).json({ message: 'Invalid token' });
         }
     },
 

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('token', data.token);
                 loginMessage.style.color = 'green';
                 loginMessage.textContent = 'Inicio de sesión exitoso';
-                window.location.href = '/profile';  // Redirigir al perfil
+                window.location.href = data.redirectUrl;  // Redirigir al perfil
             } else {
                 loginMessage.style.color = 'red';
                 loginMessage.textContent = data.message;

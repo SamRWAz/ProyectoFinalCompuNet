@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require("cors");
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
+const productsRoutes = require('./routes/productRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas de autenticación
 app.use('/auth', authRoutes);
+app.use('/products', productsRoutes)
 
 // Rutas para renderizar páginas
 app.get('/', (req, res) => {
@@ -36,10 +38,17 @@ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/views/register.html'));
 });
 
-app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/views/profile.html'));
+app.get('/admin', (req, res) => {
+  console.log('Ruta de registro accedida');
+  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/admin.html'));
+  res.sendFile(path.join(__dirname, '../public/views/admin.html'));
 });
 
+app.get('/customer', (req, res) => {
+  console.log('Ruta de registro accedida');
+  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/customer.html'));
+  res.sendFile(path.join(__dirname, '../public/views/customer.html'));
+});
 // Middleware de manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);

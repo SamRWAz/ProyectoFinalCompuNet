@@ -1,14 +1,14 @@
 class Product {
 
-    constructor(name, description, price, quantity, category) {
-        if (!name || !description || !price || !quantity || !category) {
+    constructor(name, image, price, quantity) {
+        if (!name || !image || !price || !quantity ) {
             throw new Error('Some fields were left empty, please complete the information.');
         }
+        this.id = Date.now().toString();
         this.name = name;
-        this.description = description;
+        this.image = image;
         this.price = price;
         this.quantity = quantity;
-        this.category = category;
     }
 }
 

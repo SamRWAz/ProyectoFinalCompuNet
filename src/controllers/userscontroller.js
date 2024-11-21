@@ -13,7 +13,7 @@ const UsersController = {
 
             // Verificar si el usuario ya existe
             if (db.users[email]) {
-                return res.status(400).json({ message: 'El usuario ya existe' });
+                return res.status(400).json({ message: 'The user already exists' });
             }
 
             // Crear nuevo usuario
@@ -33,7 +33,7 @@ const UsersController = {
             const token = authMiddleware.generateToken(newUser);
 
             res.status(201).json({ 
-                message: 'Usuario registrado exitosamente', 
+                message: 'User successfully created', 
                 user: newUser.toJSON(),
                 token 
             });
@@ -54,23 +54,24 @@ const UsersController = {
             // Verificar si el usuario existe
             const userData = db.users[email];
             if (!userData) {
-                return res.status(400).json({ message: 'Credenciales inválidas' });
+                return res.status(400).json({ message: 'Invalid crenditials' });
             }
 
             // Verificar contraseña
             const userInstance = User.fromJSON(userData);
 
             if (!userInstance.comparePassword(password)) {
-                return res.status(400).json({ message: 'Credenciales inválidas' });
+                return res.status(400).json({ message: 'Invalid crenditials' });
             }
 
             // Generar token
             const token = authMiddleware.generateToken(userData);
 
             res.json({ 
-                message: 'Inicio de sesión exitoso', 
+                message: 'Successful login', 
                 user: userInstance.toJSON(),
-                token 
+                token,
+                redirectUrl: userData.role === 'admin' ? '/admin' : '/customer'
             });
 
         } catch (error) {

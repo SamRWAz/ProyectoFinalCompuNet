@@ -42,32 +42,20 @@
       "name": "Papa",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JSTUFB0na_1y7yv_1aRZdQHaC4%26pid%3DApi&f=1&ipt=abd8af8a905a57e7466cb9babca76bfc4e22863aea59a21f26b12c62d13e4560&ipo=images",
       "price": 100,
-      "quantity": 5
+      "quantity": 4
     },
     "1732212724128": {
       "id": "1732212724128",
       "name": "Uva",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.aX0DdRGsN4PCXo8funJEoAHaE6%26pid%3DApi&f=1&ipt=fc30fae9312ddad784ea77bb192cd0802d39a24848d973359fcd90b602b912e5&ipo=images",
       "price": 200,
-      "quantity": 7
+      "quantity": 6
     }
   },
-  "carts": {
-    "1732237196539": {
-      "customer": "1732237196539",
-      "items": [
-        {
-          "productId": "1732208897154",
-          "name": "Papa",
-          "price": 100,
-          "quantity": 1
-        }
-      ]
-    }
-  },
+  "carts": {},
   "bills": [
     {
-      "id": "1732245275655",
+      "id": "1732249836284",
       "customer": "1732141470359",
       "products": [
         {
@@ -80,53 +68,11 @@
           "productId": "1732212724128",
           "name": "Uva",
           "price": 200,
-          "quantity": 2
-        }
-      ],
-      "totalAmount": 500,
-      "date": "2024-11-22T03:14:35.624Z"
-    },
-    {
-      "id": "1732248387071",
-      "customer": "1732237196539",
-      "products": [
-        {
-          "productId": "1732208897154",
-          "name": "Papa",
-          "price": 100,
           "quantity": 1
         }
       ],
-      "totalAmount": 100,
-      "date": "2024-11-22T04:06:27.066Z"
-    },
-    {
-      "id": "1732248985183",
-      "customer": "1732141470359",
-      "products": [
-        {
-          "productId": "1732208897154",
-          "name": "Papa",
-          "price": 100,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 100,
-      "date": "2024-11-22T04:16:25.173Z"
-    },
-    {
-      "id": "1732249093678",
-      "customer": "1732141470359",
-      "products": [
-        {
-          "productId": "1732208897154",
-          "name": "Papa",
-          "price": 100,
-          "quantity": 1
-        }
-      ],
-      "totalAmount": 100,
-      "date": "2024-11-22T04:18:13.666Z"
+      "totalAmount": 300,
+      "date": "2024-11-22T04:30:36.264Z"
     }
   ]
 }

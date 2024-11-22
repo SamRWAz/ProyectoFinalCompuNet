@@ -52,7 +52,7 @@ app.get('/customer', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/views/customer.html'));
 });
 
-app.get('/cart', (req, res) => {
+app.get('/carts', (req, res) => {
   console.log('Ruta de registro accedida');
   console.log('Ruta del archivo:', path.join(__dirname, '../public/views/cart.html'));
   res.sendFile(path.join(__dirname, '../public/views/cart.html'));

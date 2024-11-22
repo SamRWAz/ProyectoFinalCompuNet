@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Redirigir a la página del carrito
-        window.location.href = '/cart';
+        window.location.href = '/carts';
     });
 });
 

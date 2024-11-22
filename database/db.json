@@ -27,6 +27,13 @@
       "email": "m@gmail.com",
       "password": "$2b$10$zsindV.rKyriBkmSaxPqvurhZccfxv079LEgLnm0Jt30LWEUL8B5S",
       "role": "customer"
+    },
+    "mari06@gmail.com": {
+      "id": "1732237196539",
+      "name": "Mariana De La Cruz",
+      "email": "mari06@gmail.com",
+      "password": "$2b$10$G88Feq6WxJnQsXDZbpXXCeEokVM6qci8jO9JsR3xwchni87yIPvgu",
+      "role": "customer"
     }
   },
   "products": {
@@ -60,6 +67,17 @@
           "name": "Uva",
           "price": 200,
           "quantity": 3
+        }
+      ]
+    },
+    "1732237196539": {
+      "customer": "1732237196539",
+      "items": [
+        {
+          "productId": "1732208897154",
+          "name": "Papa",
+          "price": 100,
+          "quantity": 4
         }
       ]
     }

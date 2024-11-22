@@ -36,7 +36,6 @@ npm install
 
 
 
-
 ### Lista de Dependencias 
 
 1. **express**
@@ -170,7 +169,8 @@ El proyecto utiliza **JSON Web Token (JWT)** para manejar la autenticación. A c
      bash
      npm install --global windows-build-tools
      
-    
+
+3. **Errores al correr con npm run dev**
     Reinstalar los módulos con la versión actual de Node.js:
 
     Primero, elimina la carpeta node_modules y el archivo package-lock.json:
@@ -182,5 +182,11 @@ El proyecto utiliza **JSON Web Token (JWT)** para manejar la autenticación. A c
         npm install
      
 ---
+
+4. *Para ejecutar el proyecto*
+Se puede usar cualquiera de estas opciones
+    - npm run dev
+    - node src/app.js
+    - npm start
 
 ¡Gracias por revisar el proyecto!

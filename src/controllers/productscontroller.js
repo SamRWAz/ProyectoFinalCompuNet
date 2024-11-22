@@ -38,7 +38,7 @@ const ProductsController = {
             const newProduct = new Product(name, image, price, quantity);
             
 
-            db.products[name] = {
+            db.products[newProduct.id] = {
                 id: newProduct.id,
                 name: newProduct.name,
                 image: newProduct.image,

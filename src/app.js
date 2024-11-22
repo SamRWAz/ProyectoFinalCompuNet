@@ -3,6 +3,7 @@ const cors = require("cors");
 const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 const productsRoutes = require('./routes/productRoutes')
+const cartsRoutes = require('./routes/cartRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // Rutas de autenticación
 app.use('/auth', authRoutes);
 app.use('/products', productsRoutes)
+app.use('/cart', cartsRoutes)
 
 // Rutas para renderizar páginas
 app.get('/', (req, res) => {
@@ -49,6 +51,13 @@ app.get('/customer', (req, res) => {
   console.log('Ruta del archivo:', path.join(__dirname, '../public/views/customer.html'));
   res.sendFile(path.join(__dirname, '../public/views/customer.html'));
 });
+
+app.get('/cart', (req, res) => {
+  console.log('Ruta de registro accedida');
+  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/cart.html'));
+  res.sendFile(path.join(__dirname, '../public/views/cart.html'));
+});
+
 // Middleware de manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);

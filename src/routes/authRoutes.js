@@ -9,12 +9,4 @@ router.post('/register', UsersController.register);
 // Ruta de inicio de sesión
 router.post('/login', UsersController.login);
 
-// Ruta de perfil protegida
-router.get('/profile', 
-    authMiddleware.verifyToken, 
-    (req, res) => {
-        res.json(req.user);
-    }
-);
-
 module.exports = router;

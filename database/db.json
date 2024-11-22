@@ -30,14 +30,39 @@
     }
   },
   "products": {
-    "Papa": {
+    "1732208897154": {
       "id": "1732208897154",
       "name": "Papa",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JSTUFB0na_1y7yv_1aRZdQHaC4%26pid%3DApi&f=1&ipt=abd8af8a905a57e7466cb9babca76bfc4e22863aea59a21f26b12c62d13e4560&ipo=images",
       "price": 100,
       "quantity": 10
+    },
+    "1732212724128": {
+      "id": "1732212724128",
+      "name": "Uva",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.aX0DdRGsN4PCXo8funJEoAHaE6%26pid%3DApi&f=1&ipt=fc30fae9312ddad784ea77bb192cd0802d39a24848d973359fcd90b602b912e5&ipo=images",
+      "price": 200,
+      "quantity": "5"
     }
   },
-  "carts": {},
+  "carts": {
+    "1732141470359": {
+      "customer": "1732141470359",
+      "items": [
+        {
+          "productId": "1732208897154",
+          "name": "Papa",
+          "price": 100,
+          "quantity": 7
+        },
+        {
+          "productId": "1732212724128",
+          "name": "Uva",
+          "price": 200,
+          "quantity": 3
+        }
+      ]
+    }
+  },
   "orders": {}
 }

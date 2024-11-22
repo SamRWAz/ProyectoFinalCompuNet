@@ -1,12 +1,9 @@
 class Cart {
-
-    constructor(user, items){
-
-        if(!user || items.length === 0){
-            throw new Error("Missing required fields")
+    constructor(customer, items = []) {
+        if (!customer) {
+            throw new Error("Missing required fields: customer");
         }
-        
-        this.user = user;
+        this.customer = customer;
         this.items = items;
     }
 }

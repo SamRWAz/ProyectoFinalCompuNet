@@ -4,7 +4,8 @@ const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 const productsRoutes = require('./routes/productRoutes')
 const cartsRoutes = require('./routes/cartRoutes')
-const billsRoutes = require('./routes/billsRoutes')
+const billsRoutes = require('./routes/billsRoutes');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/auth', authRoutes);
 app.use('/products', productsRoutes)
 app.use('/cart', cartsRoutes)
-app.use('/bills', billsRoutes)
+app.use('/bills', billsRoutes);
 
 
 // Rutas para renderizar páginas
@@ -32,34 +33,29 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  console.log('Ruta de login accedida');
-  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/login.html'));
   res.sendFile(path.join(__dirname, '../public/views/login.html'));
 });
 
 app.get('/register', (req, res) => {
-  console.log('Ruta de registro accedida');
-  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/register.html'));
   res.sendFile(path.join(__dirname, '../public/views/register.html'));
 });
 
 app.get('/admin', (req, res) => {
-  console.log('Ruta de registro accedida');
-  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/admin.html'));
   res.sendFile(path.join(__dirname, '../public/views/admin.html'));
 });
 
 app.get('/customer', (req, res) => {
-  console.log('Ruta de registro accedida');
-  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/customer.html'));
   res.sendFile(path.join(__dirname, '../public/views/customer.html'));
 });
 
 app.get('/carts', (req, res) => {
-  console.log('Ruta de registro accedida');
-  console.log('Ruta del archivo:', path.join(__dirname, '../public/views/cart.html'));
   res.sendFile(path.join(__dirname, '../public/views/cart.html'));
 });
+
+app.get('/history', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/history.html'));
+});
+
 
 // Middleware de manejo de errores
 app.use((err, req, res, next) => {
@@ -72,7 +68,7 @@ app.use((err, req, res, next) => {
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(Servidor corriendo en http://localhost:${PORT});
 });
 
 module.exports = app;

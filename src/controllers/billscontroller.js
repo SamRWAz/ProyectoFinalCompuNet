@@ -40,6 +40,20 @@ const BillsController = {
             res.status(500).json({ message: error.message });
         }
     },
+    getBills: (req, res) => {
+        try {
+            const userId = req.user.id;
+            const db = DBConnection.readDB();
+    
+            // Obtener todas las facturas del usuario
+            const userBills = db.bills.filter(bill => bill.customer === userId);
+    
+            res.status(200).json({ bills: userBills });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+    
 };
 
 

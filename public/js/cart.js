@@ -36,16 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCart(items) {
         cartContainer.innerHTML = '';
         totalContainer.innerHTML = '';
-
+    
         if (!items || items.length === 0) {
             cartContainer.innerHTML = '<p class="text-center">Your cart is empty.</p>';
             return;
         }
-
+    
         let total = 0;
         items.forEach(item => {
             total += item.price * item.quantity;
-
+    
             const productCard = document.createElement('div');
             productCard.className = 'col-md-4 mb-4';
             productCard.innerHTML = `
@@ -57,21 +57,62 @@ document.addEventListener('DOMContentLoaded', () => {
                             Quantity: ${item.quantity}<br>
                             Total: $${(item.price * item.quantity).toFixed(2)}
                         </p>
+                        <button class="btn btn-danger btn-sm delete-product" data-id="${item.productId}">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
                     </div>
                 </div>
             `;
             cartContainer.appendChild(productCard);
         });
-
-        // Mostrar el total y el botón de pagar
+    
         totalContainer.innerHTML = `
             <h3>Total: $${total.toFixed(2)}</h3>
             <button class="btn btn-success mt-3" id="pay-button">Pay</button>
         `;
-
-        // Manejar el pago
+    
+        document.querySelectorAll('.delete-product').forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const productId = event.target.dataset.id;
+                await removeProduct(productId);
+            });
+        });
+    
         document.getElementById('pay-button').addEventListener('click', () => payCart(items, total));
     }
+    
+    async function removeProduct(productId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('You must be logged in to remove products from your cart');
+            window.location.href = '/login';
+            return;
+        }
+    
+        try {
+            const response = await fetch(`/cart/remove/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to remove product from cart');
+            }
+    
+            const result = await response.json();
+            alert(result.message);
+    
+            // Refrescar el carrito después de eliminar
+            fetchCart();
+        } catch (error) {
+            console.error('Error removing product:', error);
+            alert('Error removing product. Please try again.');
+        }
+    }
+    
 
     async function payCart(items, total) {
         const token = localStorage.getItem('token');
@@ -109,3 +150,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchCart();
 });
+

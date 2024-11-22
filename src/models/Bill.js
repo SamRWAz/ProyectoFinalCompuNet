@@ -6,6 +6,7 @@ class Bill {
         }
 
         // Asignación de propiedades
+        this.id = Date.now().toString(); // Generar ID único
         this.customer = customer;
         this.products = products; // Array de productos [{ productId, name, price, quantity }]
         this.totalAmount = totalAmount;

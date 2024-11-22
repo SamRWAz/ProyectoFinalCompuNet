@@ -52,7 +52,19 @@
       "quantity": 6
     }
   },
-  "carts": {},
+  "carts": {
+    "1732141470359": {
+      "customer": "1732141470359",
+      "items": [
+        {
+          "productId": "1732208897154",
+          "name": "Papa",
+          "price": 100,
+          "quantity": 2
+        }
+      ]
+    }
+  },
   "bills": [
     {
       "id": "1732249836284",

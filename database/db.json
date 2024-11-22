@@ -77,7 +77,24 @@
           "productId": "1732208897154",
           "name": "Papa",
           "price": 100,
-          "quantity": 4
+          "quantity": 10
+        },
+        {
+          "productId": "1732212724128",
+          "name": "Uva",
+          "price": 200,
+          "quantity": 2
+        }
+      ]
+    },
+    "1732141416055": {
+      "customer": "1732141416055",
+      "items": [
+        {
+          "productId": "1732208897154",
+          "name": "Papa",
+          "price": 100,
+          "quantity": 1
         }
       ]
     }

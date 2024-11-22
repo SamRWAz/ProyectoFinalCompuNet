@@ -25,7 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const cart = await response.json();
+            console.log('Cart data received:', cart); // Verifica qué datos llegan
             renderCart(cart.items);
+
         } catch (error) {
             console.error('Error fetching cart:', error);
             cartContainer.innerHTML = '<p class="text-center">Error loading cart</p>';
@@ -40,23 +42,43 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const header = document.createElement('div');
+        header.className = 'custom-header row align-items-center text-white mb-3';
+        header.innerHTML = `
+            <div class="col-md-4 text-center">Name</div>
+            <div class="col-md-2 text-center">Price</div>
+            <div class="col-md-2 text-center">Quantity</div>
+            <div class="col-md-4 text-center">Total</div>
+        `;
+        cartContainer.appendChild(header);
+
+        // Renderizar las tarjetas de los productos
         items.forEach(item => {
             const productCard = document.createElement('div');
-            productCard.className = 'col-md-4 mb-4';
+            productCard.className = 'custom-card row align-items-center mb-3';
+
             productCard.innerHTML = `
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">${item.name}</h5>
-                        <p class="card-text">
-                            Price: $${item.price.toFixed(2)}<br>
-                            Quantity: ${item.quantity}<br>
-                            Total: $${(item.price * item.quantity).toFixed(2)}
-                        </p>
-                    </div>
+                <div class="col-md-4 text-center">
+                    <!-- Nombre del producto -->
+                    <h5 class="custom-product-name">${item.name}</h5>
+                </div>
+                <div class="col-md-2 text-center">
+                    <!-- Precio del producto -->
+                    <p class="custom-product-price">$${item.price.toFixed(2)}</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <!-- Cantidad del producto -->
+                    <p class="custom-product-quantity">${item.quantity}</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <!-- Total calculado -->
+                    <p class="custom-product-total">$${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
             `;
             cartContainer.appendChild(productCard);
         });
+
+
     }
 
     fetchCart();

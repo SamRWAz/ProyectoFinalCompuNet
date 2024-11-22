@@ -152,3 +152,69 @@ footer a {
 footer a:hover {
     color: #FFD54F;
 }
+
+
+/* Contenedor principal del carrito */
+#cart-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cabecera del carrito */
+.custom-header {
+    background-color: #FF4500; /* Rojo suave */
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+/* Tarjetas del carrito */
+.custom-card {
+    background-color: #FFFFFF;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen del producto */
+.custom-img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Detalles del producto */
+.custom-product-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FF4500;
+}
+
+.custom-product-price,
+.custom-product-quantity {
+    font-size: 1rem;
+    color: #555;
+    margin: 0;
+}
+
+.custom-product-total{
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    margin: 0;
+}
+
+
+/* CSS para h3 color naranja */
+h3 {
+    color: #FF6F00; /* Naranja */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 20px; /* Espaciado inferior */
+}

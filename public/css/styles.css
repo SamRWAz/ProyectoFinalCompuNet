@@ -128,13 +128,17 @@ h1 {
 
 /* Footer */
 footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
     background: linear-gradient(90deg, #FF6F00, #FF4500, #FFB74D); /* Naranja, rojo suave, amarillo */
     color: #FFF8E1;
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1); /* Sombra superior */
-    margin-top: 50px;
+    flex: 1;
 }
+
 
 footer p {
     margin: 5px 0;

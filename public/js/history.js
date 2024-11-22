@@ -68,3 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchBills();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const cartLink = document.getElementById('cart-link');
+
+    cartLink.addEventListener('click', () => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            alert('You must be logged in to view your cart');
+            window.location.href = '/login'; // Redirigir al inicio de sesión si no hay token
+            return;
+        }
+
+        // Redirigir a la página del carrito
+        window.location.href = '/carts';
+    });
+});

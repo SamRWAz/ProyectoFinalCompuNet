@@ -1,0 +1,78 @@
+{
+  "users": {
+    "jcm@gmail.com": {
+      "id": "1732141416055",
+      "name": "Camilo Molina",
+      "email": "jcm@gmail.com",
+      "password": "$2b$10$lUHl2KOzu0qrwwLu7vhLgePblXvo5dyK.tIBRjZBrk07klajghsJ2",
+      "role": "admin"
+    },
+    "cm@gmail.com": {
+      "id": "1732141470359",
+      "name": "Camilo Molina",
+      "email": "cm@gmail.com",
+      "password": "$2b$10$yFFeVlGhyu9GCT15IM4mGeRLroTsrbje3sUUVdxzrgk76yE3mTCI2",
+      "role": "customer"
+    },
+    "sh@gmail.com": {
+      "id": "1732146150578",
+      "name": "Sharik Camila ",
+      "email": "sh@gmail.com",
+      "password": "$2b$10$RzJrNgs4DaoxS1IdsNEQBeIAZRxRigoQ5Vol1SSF7itp0Dw6klfki",
+      "role": "admin"
+    },
+    "m@gmail.com": {
+      "id": "1732198263111",
+      "name": "Mariana",
+      "email": "m@gmail.com",
+      "password": "$2b$10$zsindV.rKyriBkmSaxPqvurhZccfxv079LEgLnm0Jt30LWEUL8B5S",
+      "role": "customer"
+    },
+    "mari06@gmail.com": {
+      "id": "1732237196539",
+      "name": "Mariana De La Cruz",
+      "email": "mari06@gmail.com",
+      "password": "$2b$10$G88Feq6WxJnQsXDZbpXXCeEokVM6qci8jO9JsR3xwchni87yIPvgu",
+      "role": "customer"
+    }
+  },
+  "products": {
+    "1732208897154": {
+      "id": "1732208897154",
+      "name": "Papa",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JSTUFB0na_1y7yv_1aRZdQHaC4%26pid%3DApi&f=1&ipt=abd8af8a905a57e7466cb9babca76bfc4e22863aea59a21f26b12c62d13e4560&ipo=images",
+      "price": 100,
+      "quantity": 4
+    },
+    "1732212724128": {
+      "id": "1732212724128",
+      "name": "Uva",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.aX0DdRGsN4PCXo8funJEoAHaE6%26pid%3DApi&f=1&ipt=fc30fae9312ddad784ea77bb192cd0802d39a24848d973359fcd90b602b912e5&ipo=images",
+      "price": 200,
+      "quantity": 6
+    }
+  },
+  "carts": {},
+  "bills": [
+    {
+      "id": "1732249836284",
+      "customer": "1732141470359",
+      "products": [
+        {
+          "productId": "1732208897154",
+          "name": "Papa",
+          "price": 100,
+          "quantity": 1
+        },
+        {
+          "productId": "1732212724128",
+          "name": "Uva",
+          "price": 200,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 300,
+      "date": "2024-11-22T04:30:36.264Z"
+    }
+  ]
+}

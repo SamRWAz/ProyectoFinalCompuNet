@@ -1,64 +1,87 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('token');
+document.addEventListener('DOMContentLoaded', () => {
+    const billsContainer = document.getElementById('bills-container');
 
-    if (!token) {
-        alert('Debes iniciar sesión para ver tu historial.');
-        window.location.href = '/views/login.html';
-        return;
-    }
-
-    try {
-        const response = await fetch('/api/payment/history', {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            console.error('Error al cargar el historial:', error);
-            throw new Error(error.message || 'No se pudo cargar el historial.');
+    async function fetchBills() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('You must be logged in to view your payment history');
+            window.location.href = '/login';
+            return;
         }
 
-        const history = await response.json();
-        displayHistory(history);
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Hubo un problema al cargar el historial.');
+        try {
+            const response = await fetch('/bills/history', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch payment history');
+            }
+
+            const { bills } = await response.json();
+            renderBills(bills);
+        } catch (error) {
+            console.error('Error fetching payment history:', error);
+            billsContainer.innerHTML = '<p class="text-center">Error loading payment history</p>';
+        }
     }
+
+    function renderBills(bills) {
+        billsContainer.innerHTML = '';
+
+        if (!bills || bills.length === 0) {
+            billsContainer.innerHTML = '<p class="text-center">No payment history available.</p>';
+            return;
+        }
+
+        bills.forEach(bill => {
+            const billCard = document.createElement('div');
+            billCard.className = 'col-md-4 mb-4';
+            billCard.innerHTML = `
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Bill ID: ${bill.id || 'N/A'}</h5>
+                        <p class="card-text">
+                            Date: ${new Date(bill.date).toLocaleString()}<br>
+                            Total Amount: $${bill.totalAmount.toFixed(2)}<br>
+                            Products: 
+                            <ul>
+                                ${bill.products
+                                    .map(
+                                        product => `
+                                        <li>${product.name} - $${product.price.toFixed(2)} x ${product.quantity}</li>
+                                    `
+                                    )
+                                    .join('')}
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            `;
+            billsContainer.appendChild(billCard);
+        });
+    }
+
+    fetchBills();
 });
 
-function displayHistory(history) {
-    const historyElement = document.getElementById('history');
+document.addEventListener('DOMContentLoaded', () => {
+    const cartLink = document.getElementById('cart-link');
 
-    if (!history || history.length === 0) {
-        historyElement.innerHTML = '<p>No hay compras realizadas.</p>';
-        return;
-    }
+    cartLink.addEventListener('click', () => {
+        const token = localStorage.getItem('token');
 
-    historyElement.innerHTML = `
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Productos</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${history.map(order => `
-                    <tr>
-                        <td>${new Date(order.date).toLocaleString()}</td>
-                        <td>
-                            ${order.items.map(item => `
-                                ${item.quantity}x ${item.productName} ($${item.price.toFixed(2)})
-                            `).join('<br>')}
-                        </td>
-                        <td>$${order.total.toFixed(2)}</td>
-                    </tr>
-                `).join('')}
-            </tbody>
-        </table>
-    `;
-}
+        if (!token) {
+            alert('You must be logged in to view your cart');
+            window.location.href = '/login'; // Redirigir al inicio de sesión si no hay token
+            return;
+        }
+
+        // Redirigir a la página del carrito
+        window.location.href = '/carts';
+    });
+});

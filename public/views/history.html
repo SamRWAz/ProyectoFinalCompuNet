@@ -1,37 +1,65 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en-us">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Cliente</title>
+    <title>Payment History</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg" style="background: linear-gradient(90deg, #FF6F00, #FF4500, #FFB74D);">
         <div class="container">
-            <a class="navbar-brand" href="#">Historial</a>
+            <a class="navbar-brand text-light" href="/">Mi Tienda</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/views/home_client.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/views/cart.html">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/views/history.html">Historial</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" onclick="logout()">Cerrar Sesión</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="/customer">Products</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" id="cart-link" href="#">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="#">Close Session</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Historial de Pagos -->
     <div class="container mt-5">
-        <h1 class="text-center">Historial de Compras</h1>
-        <div id="history" class="mt-4">
-            <!-- El historial de compras se cargará aquí -->
+        <h1 class="text-center mb-4">Payment History</h1>
+        <div id="bills-container" class="row mt-5">
+            <!-- Las facturas se renderizarán aquí -->
         </div>
     </div>
-    <script src="/js/history.js" defer></script>
-    <script src="/js/global.js" defer></script>
+
+    <!-- Footer -->
+    <footer style="background: linear-gradient(90deg, #FF6F00, #FF4500, #FFB74D);" class="text-center mt-5 text-light py-4">
+        <div class="footer">
+            <p class="mb-1">&copy; 2024 Mi Tienda. Todos los derechos reservados.</p>
+            <p>Creado con ❤️ por el equipo de desarrollo.</p>
+            <ul class="list-unstyled d-flex justify-content-center">
+                <li class="mx-3">
+                    <a href="https://facebook.com" target="_blank" class="text-light text-decoration-none">
+                        <i class="bi bi-facebook"></i> Facebook
+                    </a>
+                </li>
+                <li class="mx-3">
+                    <a href="https://twitter.com" target="_blank" class="text-light text-decoration-none">
+                        <i class="bi bi-twitter"></i> Twitter
+                    </a>
+                </li>
+                <li class="mx-3">
+                    <a href="https://instagram.com" target="_blank" class="text-light text-decoration-none">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/history.js"></script>
 </body>
 </html>

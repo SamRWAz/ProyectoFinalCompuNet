@@ -1,56 +1,74 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
 const cors = require("cors");
+const path = require('path');
+const authRoutes = require('./routes/authRoutes');
+const productsRoutes = require('./routes/productRoutes')
+const cartsRoutes = require('./routes/cartRoutes')
+const billsRoutes = require('./routes/billsRoutes');
 
-const userController = require("./controllers/usercontroller"); // Controlador de usuarios
-const db = require("./connection/dbconnection"); // Conexión a la base de datos
-const productRoutes = require("./routes/productRoutes"); // Rutas de productos
-const publicProductRoutes = require("./routes/publicProductRoutes"); // Rutas públicas para productos
-const userRoutes = require('./routes/userRoutes');
-const roleRoutes = require('./routes/roleRoutes'); 
-const cartRoutes = require('./routes/cartRoutes.js');
-const paymentRoutes = require('./routes/paymentRoutes');
 
-const { verifyToken, isAdmin } = require('./middlewares/auth');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const app = express(); // ¡Primero inicializa 'app'!
-const port = 5000;
+// Middleware de CORS
+app.use(cors());
 
-// Middlewares
-app.use(express.json()); // Analizar JSON en el cuerpo de las solicitudes
-app.use(cors()); // Permitir solicitudes CORS
-app.use(express.static(path.join(__dirname, "../public"))); // Archivos estáticos
+// Middleware para servir archivos estáticos
+app.use(express.static(path.join(__dirname, '../public')));
 
-// Rutas públicas y protegidas
-app.use('/api/products', publicProductRoutes); // Rutas públicas
-app.use('/api/products/admin', verifyToken, isAdmin, productRoutes); // Rutas protegidas
-app.use('/api/users', userRoutes); // Rutas para usuarios
-app.use('/api/roles', roleRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/payment', paymentRoutes);
+// Middlewares para parsear JSON y datos de formularios
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-////////////////////////////////////////////////////////////////////////
-//                      Configuración de Rutas                        //
-////////////////////////////////////////////////////////////////////////
+// Rutas de autenticación
+app.use('/auth', authRoutes);
+app.use('/products', productsRoutes)
+app.use('/cart', cartsRoutes)
+app.use('/bills', billsRoutes);
 
-// Ruta para la base de datos simulada
-app.get("/db", (req, res) => {
-    const data = db.readDB();
-    res.status(200).json({ message: "Here", data });
-    console.log(`Nombre: ${data.name}, Edad: ${data.age}`);
-});
 
-// Ruta principal para la página de inicio
+// Rutas para renderizar páginas
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/views/index.html"));
+  res.sendFile(path.join(__dirname, '../public/views/index.html'));
 });
 
-// Ruta para manejar cualquier solicitud no definida (404)
-app.get("*", (req, res) => {
-    res.status(404).sendFile(path.join(__dirname, "../public/views/notfound.html"));
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/login.html'));
 });
 
-// Iniciar el servidor
-app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/register.html'));
 });
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/admin.html'));
+});
+
+app.get('/customer', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/customer.html'));
+});
+
+app.get('/carts', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/cart.html'));
+});
+
+app.get('/history', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/views/history.html'));
+});
+
+
+// Middleware de manejo de errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ 
+    message: 'Algo salió mal', 
+    error: process.env.NODE_ENV === 'development' ? err.message : {} 
+  });
+});
+
+// Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+module.exports = app;

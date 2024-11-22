@@ -4,6 +4,7 @@ const path = require('path');
 const authRoutes = require('./routes/authRoutes');
 const productsRoutes = require('./routes/productRoutes')
 const cartsRoutes = require('./routes/cartRoutes')
+const billsRoutes = require('./routes/billsRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/auth', authRoutes);
 app.use('/products', productsRoutes)
 app.use('/cart', cartsRoutes)
+app.use('/bills', billsRoutes)
+
 
 // Rutas para renderizar páginas
 app.get('/', (req, res) => {

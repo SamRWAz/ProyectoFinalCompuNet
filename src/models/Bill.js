@@ -1,12 +1,13 @@
-class Order {
-    constructor(user, products, totalAmount, date) {
+class Bill {
+    constructor(customer, products = [], totalAmount, date) {
         // Validación de campos obligatorios
-        if (!user || !products || products.length === 0 || !totalAmount || !date ) {
+        if (!customer || !totalAmount || !date ) {
             throw new Error("Some fields were left empty, please complete the information.");
         }
 
         // Asignación de propiedades
-        this.user = user;
+        this.id = Date.now().toString(); // Generar ID único
+        this.customer = customer;
         this.products = products; // Array de productos [{ productId, name, price, quantity }]
         this.totalAmount = totalAmount;
         this.date = date;
@@ -14,4 +15,4 @@ class Order {
 }
 
 // Exportación de la clase Order
-module.exports = Order;
+module.exports = Bill;
